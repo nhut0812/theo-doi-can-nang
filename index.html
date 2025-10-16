@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Theo dõi cân nặng - Premium</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2966/2966481.png">
+<link rel="manifest" href="manifest.json">
 <style>
   :root {
     --bg: #ffffff;
@@ -950,5 +951,13 @@ window.addEventListener("load", () => {
 });
 
 </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(() => console.log('✅ Service Worker registered'))
+      .catch(err => console.error('❌ Service Worker failed:', err));
+  }
+</script>
+
 </body>
 </html>
