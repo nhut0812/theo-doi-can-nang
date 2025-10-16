@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -559,6 +560,105 @@ document.getElementById("resetBtn").onclick = ()=>{
     recompute();
   }
 };
+// ====== ĐỒNG BỘ GITHUB GIST (an toàn, không lộ token) ======
+
+// Lưu token và gist ID vào localStorage
+const KEY_GIST = "weight-tracker:gist";
+function loadGistInfo(){
+  try { return JSON.parse(localStorage.getItem(KEY_GIST)||"{}"); }catch(e){return{};}
+}
+function saveGistInfo(o){ localStorage.setItem(KEY_GIST, JSON.stringify(o)); }
+
+async function askGistInfo(){
+  const info = loadGistInfo();
+  
+  let gistId = prompt("Nhập Gist ID: 1f849577016aeb8150c4ffe2e43ddc1b", info.gistId || "");
+  if(!gistId) return null;
+  let token = prompt("Nhập GitHub Token: ", info.token || "");
+  if(!token) return null;
+  const obj = { gistId, token };
+  saveGistInfo(obj);
+  return obj;
+}
+
+// Ghi dữ liệu lên Gist
+async function syncToGist(){
+  let {gistId, token} = loadGistInfo();
+  if(!gistId || !token){
+    const got = await askGistInfo();
+    if(!got) return alert("Chưa nhập đủ thông tin.");
+    gistId = got.gistId; token = got.token;
+  }
+  try{
+    const res = await fetch(`https://api.github.com/gists/${gistId}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': 'token ' + token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        files: {
+          'can-nang-data.json': {
+            content: JSON.stringify(loadData(), null, 2)
+          }
+        }
+      })
+    });
+    if(res.ok){
+      alert("✅ Đã đồng bộ lên GitHub Gist thành công!");
+    }else{
+      alert("⚠️ Lỗi đồng bộ. Hãy kiểm tra token hoặc gist ID.");
+    }
+  }catch(e){
+    console.error(e);
+    alert("⚠️ Không thể kết nối đến GitHub.");
+  }
+}
+
+// Tải dữ liệu từ Gist
+async function loadFromGist(){
+  let {gistId, token} = loadGistInfo();
+  if(!gistId || !token){
+    const got = await askGistInfo();
+    if(!got) return alert("Chưa nhập đủ thông tin.");
+    gistId = got.gistId; token = got.token;
+  }
+  try{
+    const res = await fetch(`https://api.github.com/gists/${gistId}`, {
+      headers: { 'Authorization': 'token ' + token }
+    });
+    const gist = await res.json();
+    const content = gist.files['can-nang-data.json'].content;
+    const obj = JSON.parse(content);
+    if(obj && typeof obj==="object"){
+      saveData(obj);
+      data = obj;
+      recompute();
+      alert("📥 Đã tải dữ liệu từ GitHub Gist!");
+    }else{
+      alert("⚠️ File trên Gist không hợp lệ.");
+    }
+  }catch(e){
+    console.error(e);
+    alert("⚠️ Không thể tải từ GitHub Gist.");
+  }
+}
+
+// Thêm nút vào giao diện
+window.addEventListener("DOMContentLoaded", ()=>{
+  const wrap = document.querySelector("#exportBtn").parentNode;
+  const btnSync = document.createElement("button");
+  btnSync.textContent = "⬆️ Đồng bộ lên GitHub";
+  btnSync.className = "ghost";
+  btnSync.onclick = syncToGist;
+  wrap.appendChild(btnSync);
+
+  const btnLoad = document.createElement("button");
+  btnLoad.textContent = "⬇️ Tải từ GitHub";
+  btnLoad.className = "ghost";
+  btnLoad.onclick = loadFromGist;
+  wrap.appendChild(btnLoad);
+});
 
 // ====== KHỞI CHẠY ======
 recompute();
