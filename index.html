@@ -1,52 +1,172 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Theo dõi cân nặng - Premium</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2966/2966481.png">
 <style>
-  :root{
-    --bg:#ffffff; --card:#f7f9fc; --ink:#0b1220; --muted:#5b6576; --accent:#2563eb;
-    --ok:#10b981; --warn:#f59e0b; --bad:#ef4444; --line:#e5e7eb; --goal:#9ca3af;
+  :root {
+    --bg: #ffffff;
+    --card: #f7f9fc;
+    --ink: #0b1220;
+    --muted: #5b6576;
+    --accent: #2563eb;
+    --ok: #10b981;
+    --warn: #f59e0b;
+    --bad: #ef4444;
+    --line: #e5e7eb;
+    --goal: #9ca3af;
   }
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial}
-  header{padding:16px 14px 6px}
-  h1{font-size:20px;margin:0 0 6px}
-  .sub{color:var(--muted);font-size:13px}
-  .wrap{max-width:1100px;margin:0 auto;padding:10px}
-  .row{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
-  .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 6px 20px rgba(15,23,42,.06)}
-  @media(min-width:720px){.card.sm-6{grid-column:span 6}.card.sm-4{grid-column:span 4}.card.sm-8{grid-column:span 8}.card.sm-12{grid-column:span 12}}
-  .label{font-size:12px;color:var(--muted)}
-  .value{font-weight:700;font-size:20px;margin-top:2px}
-  .form-row{display:flex;gap:8px;flex-wrap:wrap}
-  input,button,select{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink)}
-  button{background:var(--accent);color:#fff;border:none;cursor:pointer;transition:transform .06s}
-  button:active{transform:translateY(1px)}
-  button.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
-  button:disabled{opacity:.6;cursor:not-allowed}
-  .pill{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;border:1px solid var(--line);background:#fff}
-  table{width:100%;border-collapse:collapse}
-  th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;font-size:14px;vertical-align:top}
-  th{font-weight:700;background:#fff;position:sticky;top:0;z-index:2}
-  tbody tr:hover{background:#fafafa}
-  .muted{color:var(--muted)}
-  canvas{width:100%;height:300px;display:block;border-radius:12px;background:#fff;border:1px solid var(--line)}
-  .tags{display:flex;gap:6px;flex-wrap:wrap}
-  .hint{font-size:12px;color:var(--muted)}
-  .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
-  .entered{background:#ecfeff} /* ngày đã nhập */
-  .badge{display:inline-block;padding:2px 6px;border-radius:999px;font-size:11px;border:1px solid var(--line);background:#fff}
-  .alert{padding:10px;border:1px solid #fecaca;background:#fff1f2;color:#991b1b;border-radius:10px}
-  .tooltip{position:absolute;pointer-events:none;background:#111827;color:#fff;padding:6px 8px;border-radius:8px;font-size:12px;transform:translate(-50%,-120%);white-space:nowrap}
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
+  }
+
+  /* ==== HEADER PREMIUM ==== */
+  header {
+    padding: 28px 14px 18px;
+    text-align: center;
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    color: #fff;
+    border-radius: 0 0 24px 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+
+  header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin: 0;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+
+  header .sub {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-top: 6px;
+    letter-spacing: 0.4px;
+  }
+
+  @media (max-width: 480px) {
+    header h1 { font-size: 22px; }
+    header .sub { font-size: 12px; }
+  }
+
+  /* ==== CẤU TRÚC CHUNG ==== */
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 10px; }
+  .row { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+
+  .card {
+    grid-column: span 12;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 6px 20px rgba(15,23,42,.06);
+  }
+
+  @media (min-width: 720px) {
+    .card.sm-6 { grid-column: span 6; }
+    .card.sm-4 { grid-column: span 4; }
+    .card.sm-8 { grid-column: span 8; }
+    .card.sm-12 { grid-column: span 12; }
+  }
+
+  .label { font-size: 12px; color: var(--muted); }
+  .value { font-weight: 700; font-size: 20px; margin-top: 2px; }
+
+  .form-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  input, button, select {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+  }
+
+  button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: transform .06s, background .2s;
+  }
+
+  button:hover { background: #1d4ed8; }
+  button:active { transform: translateY(1px); }
+  button.ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+  button:disabled { opacity: .6; cursor: not-allowed; }
+
+  .pill { display: inline-block; padding: 4px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--line); background: #fff; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th, td {
+    border-bottom: 1px solid var(--line);
+    padding: 10px 8px;
+    text-align: left;
+    font-size: 14px;
+    vertical-align: top;
+  }
+
+  th { font-weight: 700; background: #fff; position: sticky; top: 0; z-index: 2; }
+  tbody tr:hover { background: #fafafa; }
+
+  .muted { color: var(--muted); }
+  canvas { width: 100%; height: 300px; display: block; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .hint { font-size: 12px; color: var(--muted); }
+  .ok { color: var(--ok); }
+  .bad { color: var(--bad); }
+  .warn { color: var(--warn); }
+  .entered { background: #ecfeff; } /* ngày đã nhập */
+  .badge { display: inline-block; padding: 2px 6px; border-radius: 999px; font-size: 11px; border: 1px solid var(--line); background: #fff; }
+
+  /* ==== ALERT ==== */
+  .alert {
+    border: 1px solid #fde68a;
+    background: #fff8e1;
+    color: #92400e;
+    border-radius: 12px;
+    line-height: 1.5;
+    font-size: 14px;
+    padding: 12px;
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ==== BẢNG LOG ==== */
+  #logTable th:first-child,
+  #logTable td:first-child {
+    min-width: 100px;
+    white-space: nowrap;
+  }
+
+  #logTable { min-width: 650px; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 6px; }
+    .card { padding: 10px; }
+    #logTable th:first-child,
+    #logTable td:first-child { min-width: 90px; }
+  }
 </style>
+
 </head>
 <body>
-<header class="wrap">
-  <h1>📊 Theo dõi cân nặng – Premium</h1>
+<header>
+  <h1>📊 Theo dõi cân nặng <span style="opacity:0.9;font-weight:600;">– Premium</span></h1>
+  <div class="sub">Quản lý sức khỏe mỗi ngày • Dữ liệu đồng bộ thông minh ☁️</div>
 </header>
+
 
 <div class="wrap">
   <div class="row">
@@ -194,16 +314,105 @@ let tmp = loadTmp();   // {dateInput, weightInput}
 if(tmp.weightInput){ document.getElementById("weightInput").value = tmp.weightInput; }
 document.getElementById("weightInput").addEventListener("input", (e)=>{ tmp.weightInput = e.target.value; saveTmp(tmp); });
 
-// ====== AI MINI LỜI KHUYÊN ======
+// ====== AI MINI LỜI KHUYÊN (phiên bản chuẩn & chuyên sâu) ======
+// ====== AI MINI LỜI KHUYÊN (phiên bản tối ưu & chuyên sâu nhất) ======
 function adviceForDelta(d){
-  if(d === null || isNaN(d)) return "";
-  if(d <= -1.0) return "Giảm nhanh quá, nên ăn đủ và ngủ đủ để an toàn ❤️";
-  if(d <= -0.3) return "Tốt lắm! Giữ nhịp hiện tại 👏";
-  if(Math.abs(d) < 0.1) return "Ổn định rồi! Tiếp tục duy trì nhé ✨";
-  if(d < 0.3) return "Tăng nhẹ, có thể do nước hoặc ăn mặn 😅";
-  if(d < 0.5) return "Tăng nhẹ, thử giảm tinh bột buổi tối và tăng đi bộ nhé 💪";
-  return "Tăng khá nhiều, xem lại khẩu phần + nước ngọt, duy trì vận động đều 💪";
+  if (d == null || isNaN(d)) return "";
+
+  // làm tròn gọn hiển thị
+  const abs = Math.abs(d);
+  const dd = (d > 0 ? "+" : "") + (Math.round(d * 10) / 10).toFixed(1);
+
+  // === ỔN ĐỊNH ===
+  if (abs < 0.1) {
+    return `⚖️ Ổn định (${dd}kg). Cơ thể đang ở trạng thái cân bằng.
+👉 Duy trì:
+• Ăn đúng bữa, không bỏ bữa sáng
+• Ngủ đủ 7–8 tiếng, tránh stress
+• Uống đủ 2L nước/ngày
+• Tiếp tục tập nhẹ hoặc đi bộ đều`;
+  }
+
+  // === GIẢM CÂN ===
+  if (d < 0) {
+    if (abs >= 1.5)
+      return `🚨 Giảm rất nhanh (${dd}kg)! Có thể mất nước hoặc thiếu năng lượng.
+👉 Nên:
+• Ăn đủ 3 bữa, thêm 1 bữa phụ có đạm
+• Uống 2–2.5L nước/ngày
+• Nghỉ ngơi nhiều hơn, tránh tập nặng
+• Theo dõi nếu mệt, hoa mắt hoặc ngủ kém`;
+
+    if (abs >= 1.0)
+      return `💪 Giảm mạnh (${dd}kg). Tiến độ rất tốt!
+👉 Gợi ý:
+• Giữ khẩu phần đạm 1.6–2g/kg
+• Hạn chế tinh bột trắng, tăng rau xanh
+• Ăn tối sớm (trước 19h30)
+• Tránh bỏ bữa hoặc nhịn ăn cực đoan`;
+
+    if (abs >= 0.6)
+      return `✅ Giảm ổn định (${dd}kg). Tiến độ lý tưởng.
+👉 Tiếp tục:
+• Uống nước đều trong ngày
+• Ăn chậm, nhai kỹ
+• Duy trì ngủ sớm & giảm đồ chiên rán
+• Tập vừa sức (đi bộ, plank, yoga)`;
+
+    if (abs >= 0.3)
+      return `🌿 Giảm nhẹ (${dd}kg). Hoàn toàn bình thường.
+👉 Duy trì:
+• Giảm tinh bột buổi tối
+• Tăng rau & trái cây tươi
+• Đi bộ 6–8k bước/ngày
+• Theo dõi thêm vài ngày nữa để thấy xu hướng`;
+
+    return `💤 Giảm rất nhẹ (${dd}kg) — dao động do nước hoặc muối.
+👉 Uống đủ nước, ngủ sớm và ăn nhạt 1–2 ngày.`;
+  }
+
+  // === TĂNG CÂN ===
+  if (d > 0) {
+    if (d >= 1.2)
+      return `❗ Tăng nhanh (${dd}kg)! Có thể do “cheat day” hoặc ăn tối muộn.
+👉 Cần:
+• Ăn nhạt 2 ngày, cắt đồ ngọt và nước có gas
+• Uống 2.5L nước/ngày
+• Tăng vận động (đi bộ 8k–10k bước/ngày)
+• Tránh thức khuya & đồ ăn khuya`;
+
+    if (d >= 0.8)
+      return `🚩 Tăng rõ (${dd}kg). Cơ thể có thể tích nước hoặc dư calo.
+👉 Gợi ý:
+• Ghi lại thực đơn 2–3 ngày gần nhất
+• Giảm 25–30% tinh bột buổi tối
+• Ăn chậm, nhai kỹ, hạn chế snack
+• Đi bộ nhanh 30 phút mỗi ngày`;
+
+    if (d >= 0.5)
+      return `🥯 Tăng nhẹ vừa (${dd}kg). Có thể do ăn mặn hoặc ít vận động.
+👉 Khắc phục:
+• Giảm tinh bột trắng, ăn nhạt hơn
+• Uống nước ấm trước bữa ăn
+• Không ăn vặt sau 20h
+• Ngủ đủ giấc để giảm cortisol`;
+
+    if (d >= 0.3)
+      return `📈 Tăng nhẹ (${dd}kg). Dao động tạm thời là bình thường.
+👉 Mẹo:
+• Uống thêm nước, hạn chế muối
+• Ăn nhiều rau xanh, trái cây tươi
+• Tập nhẹ (đi bộ 15 phút sau ăn tối)
+• Kiểm tra lại lượng nước nạp trong ngày`;
+
+    return `🙂 Tăng rất nhẹ (${dd}kg) — biến động nhỏ trong giới hạn an toàn.
+👉 Duy trì ăn uống điều độ, theo dõi 2–3 ngày tới để xem xu hướng.`;
+  }
+
+  return "";
 }
+
+
 
 // ====== TÍNH TOÁN CHÍNH ======
 function recompute(){
@@ -271,15 +480,29 @@ function recompute(){
   etaValue.textContent = eta;
 
   // Cảnh báo tăng 3 ngày liên tiếp
-  const alertBox = document.getElementById("gainAlert");
-  let gain3 = false;
-  for(let i=2;i<weights.length;i++){
-    const a=weights[i-2], b=weights[i-1], c=weights[i];
-    if(a!=null && b!=null && c!=null){
-      if(c>b && b>a){ gain3 = true; break; }
-    }
-  }
-  alertBox.style.display = gain3 ? "block" : "none";
+// === CẢNH BÁO THÔNG MINH ===
+const alertBox = document.getElementById("gainAlert");
+alertBox.style.display = "none";
+
+let upCount = 0, downCount = 0;
+for (let i = weights.length - 1; i >= 1; i--) {
+  if (weights[i] == null || weights[i - 1] == null) continue;
+  const diff = weights[i] - weights[i - 1];
+  if (diff > 0.1) upCount++;
+  else if (diff < -0.1) downCount++;
+  else break;
+  if (upCount >= 3 || downCount >= 3) break;
+}
+
+if (upCount >= 3) {
+  alertBox.textContent =
+    "⚠️ Bạn đang tăng cân 3 ngày liên tiếp. Hãy kiểm tra lại khẩu phần tinh bột, ăn nhạt hơn và tăng vận động nhẹ 💪";
+  alertBox.style.display = "block";
+} else if (downCount >= 3) {
+  alertBox.textContent =
+    "🎉 Bạn giảm liên tục 3 ngày rồi! Duy trì nhịp độ, nhớ ăn đủ đạm và ngủ ngon để giữ sức khỏe ❤️";
+  alertBox.style.display = "block";
+}
 
   // Render bảng
   renderTable(weights, bmi, progress);
@@ -503,21 +726,29 @@ function drawChart(series, avg7){
   canvas.onmouseleave = ()=> tip.style.display="none";
 }
 
-// ====== SỰ KIỆN ======
-document.getElementById("saveBtn").onclick = ()=>{
+document.getElementById("saveBtn").onclick = async ()=>{
   const d = document.getElementById("dateInput").value;
   const w = parseFloat(document.getElementById("weightInput").value);
-  if(!d || isNaN(w) || w<=0){ alert("Vui lòng nhập ngày và cân nặng hợp lệ."); return; }
+  if(!d || isNaN(w) || w<=0){ alert("⚠️ Vui lòng nhập ngày và cân nặng hợp lệ."); return; }
   const dd = new Date(d);
   if(dd < START_DATE || dd > dates[dates.length-1]){
-    alert("Ngày nằm ngoài phạm vi theo dõi."); return;
+    alert("⚠️ Ngày nằm ngoài phạm vi theo dõi."); return;
   }
+
+  // Lưu cân nặng
   data[d] = Math.round(w*10)/10;
   saveData(data);
   tmp.weightInput = ""; saveTmp(tmp);
   document.getElementById("weightInput").value="";
   recompute();
+
+  // Thông báo
+  alert("✅ Đã lưu cân nặng!");
+
+  // Tự đồng bộ lên GitHub Gist
+  await syncToGist();
 };
+
 
 document.getElementById("clearBtn").onclick = ()=>{
   const d = document.getElementById("dateInput").value;
@@ -581,78 +812,106 @@ async function askGistInfo(){
   return obj;
 }
 
-// Ghi dữ liệu lên Gist
+// ====== ☁️ ĐỒNG BỘ GITHUB GIST 2 CHIỀU (CÓ THÔNG BÁO) ======
 async function syncToGist(){
-  let {gistId, token} = loadGistInfo();
-  if(!gistId || !token){
+  let { gistId, token } = loadGistInfo();
+  if (!gistId || !token) {
     const got = await askGistInfo();
-    if(!got) return alert("Chưa nhập đủ thông tin.");
-    gistId = got.gistId; token = got.token;
+    if (!got) return alert("⚠️ Chưa nhập đủ thông tin Gist.");
+    gistId = got.gistId;
+    token = got.token;
   }
-  try{
+
+  try {
+    const currentData = loadData();
+    currentData._updatedAt = new Date().toISOString();
+    saveData(currentData);
+
     const res = await fetch(`https://api.github.com/gists/${gistId}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Authorization': 'token ' + token,
-        'Content-Type': 'application/json'
+        "Authorization": "token " + token,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         files: {
-          'can-nang-data.json': {
-            content: JSON.stringify(loadData(), null, 2)
-          }
-        }
-      })
+          "can-nang-data.json": {
+            content: JSON.stringify(currentData, null, 2),
+          },
+        },
+      }),
     });
-    if(res.ok){
-      alert("✅ Đã đồng bộ lên GitHub Gist thành công!");
-    }else{
-      alert("⚠️ Lỗi đồng bộ. Hãy kiểm tra token hoặc gist ID.");
+
+    if (res.ok) {
+      alert("✅ Đã đồng bộ dữ liệu lên GitHub Gist thành công!");
+    } else {
+      const text = await res.text();
+      alert("⚠️ Lỗi đồng bộ Gist:\n" + text.slice(0, 200));
     }
-  }catch(e){
+  } catch (e) {
+    alert("❌ Không thể đồng bộ Gist: " + e.message);
     console.error(e);
-    alert("⚠️ Không thể kết nối đến GitHub.");
   }
 }
 
-// Tải dữ liệu từ Gist
-async function loadFromGist(){
-  let {gistId, token} = loadGistInfo();
-  if(!gistId || !token){
+async function loadFromGist() {
+  let { gistId, token } = loadGistInfo();
+  if (!gistId || !token) {
     const got = await askGistInfo();
-    if(!got) return alert("Chưa nhập đủ thông tin.");
-    gistId = got.gistId; token = got.token;
+    if (!got) return;
+    gistId = got.gistId;
+    token = got.token;
   }
-  try{
+
+  try {
     const res = await fetch(`https://api.github.com/gists/${gistId}`, {
-      headers: { 'Authorization': 'token ' + token }
+      headers: { Authorization: "token " + token },
     });
     const gist = await res.json();
-    const content = gist.files['can-nang-data.json'].content;
-    const obj = JSON.parse(content);
-    if(obj && typeof obj==="object"){
-      saveData(obj);
-      data = obj;
-      recompute();
-      alert("📥 Đã tải dữ liệu từ GitHub Gist!");
-    }else{
-      alert("⚠️ File trên Gist không hợp lệ.");
+    const content = gist.files["can-nang-data.json"]?.content;
+    if (!content) {
+      alert("⚠️ Không tìm thấy file can-nang-data.json trên Gist!");
+      return;
     }
-  }catch(e){
+
+    const remote = JSON.parse(content);
+    const local = loadData();
+
+    const localTime = new Date(local._updatedAt || 0);
+    const remoteTime = new Date(remote._updatedAt || 0);
+
+    if (remoteTime > localTime) {
+      saveData(remote);
+      data = remote;
+      recompute();
+      alert("📥 Đã tải dữ liệu mới nhất từ GitHub Gist!");
+    } else if (localTime > remoteTime) {
+      alert("🆗 Dữ liệu trong máy mới hơn, giữ nguyên.");
+    } else {
+      alert("ℹ️ Dữ liệu đã đồng bộ, không có thay đổi.");
+    }
+  } catch (e) {
+    alert("❌ Không thể tải dữ liệu từ Gist: " + e.message);
     console.error(e);
-    alert("⚠️ Không thể tải từ GitHub Gist.");
   }
 }
 
-// Thêm nút vào giao diện
+// Khi mở trang, tự động tải dữ liệu Gist nếu có
+window.addEventListener("DOMContentLoaded", () => {
+  loadFromGist();
+});
+// ====== NÚT GIAO DIỆN ĐỒNG BỘ GIST ======
 window.addEventListener("DOMContentLoaded", ()=>{
   const wrap = document.querySelector("#exportBtn").parentNode;
+
+  // Nút đồng bộ lên GitHub
   const btnSync = document.createElement("button");
   btnSync.textContent = "⬆️ Đồng bộ lên GitHub";
   btnSync.className = "ghost";
   btnSync.onclick = syncToGist;
   wrap.appendChild(btnSync);
 
+  // Nút tải dữ liệu từ GitHub
   const btnLoad = document.createElement("button");
   btnLoad.textContent = "⬇️ Tải từ GitHub";
   btnLoad.className = "ghost";
@@ -660,8 +919,36 @@ window.addEventListener("DOMContentLoaded", ()=>{
   wrap.appendChild(btnLoad);
 });
 
+
 // ====== KHỞI CHẠY ======
 recompute();
+// ====== 🔔 THÔNG BÁO NHẮC NHẬP CÂN MỖI SÁNG ======
+async function requestNotificationPermission(){
+  if (!("Notification" in window)) return;
+  const permission = await Notification.requestPermission();
+  if (permission === "granted") scheduleReminder();
+}
+
+function scheduleReminder(){
+  const now = new Date();
+  const next = new Date();
+  next.setHours(6,30,0,0); // giờ nhắc: 6h30 sáng
+  if (next <= now) next.setDate(next.getDate() + 1); // nếu đã qua giờ, dời sang mai
+  const delay = next - now;
+
+  setTimeout(() => {
+    new Notification("📊 Nhập cân nặng hôm nay nhé!", {
+      body: "Giữ thói quen tốt giúp bạn đạt mục tiêu nhanh hơn 💪",
+      icon: "https://cdn-icons-png.flaticon.com/512/2966/2966481.png"
+    });
+    scheduleReminder(); // tự đặt lại cho ngày mai
+  }, delay);
+}
+
+window.addEventListener("load", () => {
+  requestNotificationPermission();
+});
+
 </script>
 </body>
 </html>
