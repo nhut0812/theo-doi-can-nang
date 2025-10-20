@@ -160,10 +160,12 @@
   }
 </style>
 <link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Theo dõi cân nặng">
 <link rel="apple-touch-icon" href="icon-192.png">
+
 
 </head>
 <body>
@@ -973,20 +975,38 @@ storageBucket: "theo-doi-can-nang.appspot.com",
   firebase.initializeApp(firebaseConfig);
   const messaging = firebase.messaging();
 
-  // Đăng ký service worker
-navigator.serviceWorker.register('service-worker.js').then((registration) => {
-  messaging.useServiceWorker(registration);
+
+// Đăng ký service worker trước khi xin quyền thông báo
+navigator.serviceWorker.register('service-worker.js')
+  .then((registration) => {
+    console.log('✅ Service Worker đã đăng ký');
+    messaging.useServiceWorker(registration);
+
+    // Chờ một chút để Safari/iOS nhận diện app
+    setTimeout(() => {
+      Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+          messaging.getToken({
+            vapidKey: "B0xZj-Slo2VF9Ot0yaE3dst9bh_XNl4FdWoLS8wd7yTA0_Y0X6Fplhn58Fzf7zr9ns1bdL1CgRHoz2h79aVT0Q"
+          }).then((token) => {
+            console.log("Firebase Token:", token);
+            alert("🔔 Đã bật thông báo thành công!");
+          });
+        } else {
+          console.log("❌ Người dùng từ chối quyền thông báo");
+        }
+      });
+    }, 1500); // đợi 1.5 giây
+  })
+  .catch((err) => console.error('Lỗi khi đăng ký Service Worker:', err));
 
 
-    // Xin quyền nhận thông báo
-    messaging.requestPermission()
-      .then(() => messaging.getToken({ vapidKey: "B0xZj-Slo2VF9Ot0yaE3dst9bh_XNl4FdWoLS8wd7yTA0_Y0X6Fplhn58Fzf7zr9ns1bdL1CgRHoz2h79aVT0Q" }))
-      .then((token) => {
-        console.log("Firebase Token:", token);
-        alert("🔔 Đã bật thông báo thành công!");
-      })
-      .catch((err) => console.log("Lỗi khi xin quyền:", err));
-  });
+// Khi nhận thông báo (khi app đang mở)
+messaging.onMessage((payload) => {
+  console.log("📨 Thông báo đến:", payload);
+  alert(payload.notification.title + ": " + payload.notification.body);
+});
+
 
   // Khi nhận thông báo (khi app đang mở)
   messaging.onMessage((payload) => {
