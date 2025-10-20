@@ -957,64 +957,8 @@ window.addEventListener("load", () => {
 });
 
 </script>
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-messaging-compat.js"></script>
-
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyC5VCyq3fUtYMDtm2BpssEvin8tFbMHjA",
-    authDomain: "theo-doi-can-nang.firebaseapp.com",
-    projectId: "theo-doi-can-nang",
-storageBucket: "theo-doi-can-nang.appspot.com",
-    messagingSenderId: "628935130155",
-    appId: "1:628935130155:web:2b10144d59074ccd7607e6",
-    measurementId: "G-6QEPJ5PDJS"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const messaging = firebase.messaging();
 
 
-// Đăng ký service worker trước khi xin quyền thông báo
-navigator.serviceWorker.register('/theo-doi-can-nang/service-worker.js')
-
-  .then((registration) => {
-    console.log('✅ Service Worker đã đăng ký');
-    messaging.useServiceWorker(registration);
-
-    // Chờ một chút để Safari/iOS nhận diện app
-    setTimeout(() => {
-      Notification.requestPermission().then((permission) => {
-        if (permission === 'granted') {
-          messaging.getToken({
-            vapidKey: "B0xZj-Slo2VF9Ot0yaE3dst9bh_XNl4FdWoLS8wd7yTA0_Y0X6Fplhn58Fzf7zr9ns1bdL1CgRHoz2h79aVT0Q"
-          }).then((token) => {
-            console.log("Firebase Token:", token);
-            alert("🔔 Đã bật thông báo thành công!");
-          });
-        } else {
-          console.log("❌ Người dùng từ chối quyền thông báo");
-        }
-      });
-    }, 1500); // đợi 1.5 giây
-  })
-  .catch((err) => console.error('Lỗi khi đăng ký Service Worker:', err));
-
-
-// Khi nhận thông báo (khi app đang mở)
-messaging.onMessage((payload) => {
-  console.log("📨 Thông báo đến:", payload);
-  alert(payload.notification.title + ": " + payload.notification.body);
-});
-
-
-  // Khi nhận thông báo (khi app đang mở)
-  messaging.onMessage((payload) => {
-    console.log("Thông báo đến:", payload);
-    alert(payload.notification.title + ": " + payload.notification.body);
-  });
-</script>
 
 </body>
 </html>
