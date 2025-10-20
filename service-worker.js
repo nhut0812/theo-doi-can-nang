@@ -1,3 +1,20 @@
+// ===== HỖ TRỢ FIREBASE MESSAGING =====
+importScripts('https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/10.14.0/firebase-messaging-compat.js');
+
+firebase.initializeApp({
+  apiKey: "AIzaSyC5VCyq3fUtYMDtm2BpssEvin8tFbMHjA",
+  authDomain: "theo-doi-can-nang.firebaseapp.com",
+  projectId: "theo-doi-can-nang",
+  storageBucket: "theo-doi-can-nang.appspot.com",
+  messagingSenderId: "628935130155",
+  appId: "1:628935130155:web:2b10144d59074ccd7607e6",
+  measurementId: "G-6QEPJ5PDJS"
+});
+
+const messaging = firebase.messaging();
+
+
 // ===== CÀI ĐẶT & KÍCH HOẠT =====
 self.addEventListener('install', event => {
   console.log('Service Worker installed');
