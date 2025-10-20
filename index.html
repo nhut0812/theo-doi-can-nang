@@ -930,53 +930,35 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
 // ====== KHỞI CHẠY ======
 recompute();
-// ====== 🔔 THÔNG BÁO NHẮC NHẬP CÂN MỖI SÁNG ======
-async function requestNotificationPermission(){
-  if (!("Notification" in window)) return;
-  const permission = await Notification.requestPermission();
-  if (permission === "granted") scheduleReminder();
-}
 
-function scheduleReminder(){
-  const now = new Date();
-  const next = new Date();
-  next.setHours(6,50,0,0); // giờ nhắc: 6h30 sáng
-  if (next <= now) next.setDate(next.getDate() + 1); // nếu đã qua giờ, dời sang mai
-  const delay = next - now;
-
-  setTimeout(() => {
-    new Notification("📊 Nhập cân nặng hôm nay nhé!", {
-      body: "Giữ thói quen tốt giúp bạn đạt mục tiêu nhanh hơn 💪",
-      icon: "https://cdn-icons-png.flaticon.com/512/2966/2966481.png"
-    });
-    scheduleReminder(); // tự đặt lại cho ngày mai
-  }, delay);
-}
-
-document.getElementById("notifyBtn").onclick = async () => {
-  if (!("Notification" in window)) {
-    alert("Trình duyệt của bạn không hỗ trợ thông báo.");
-    return;
-  }
-
-  if (Notification.permission === "granted") {
-    scheduleReminder();
-    alert("✅ Đã bật thông báo mỗi sáng!");
-  } else {
-    const permission = await Notification.requestPermission();
-    if (permission === "granted") {
-      scheduleReminder();
-      alert("✅ Đã bật thông báo mỗi sáng!");
-    } else {
-      alert("⚠️ Bạn đã từ chối quyền thông báo.");
-    }
-  }
-};
 
 
 </script>
 
+<script>
+// ====== 🔔 Thông báo mỗi khi mở web ======
+window.addEventListener("load", async () => {
+  // Kiểm tra trình duyệt có hỗ trợ thông báo không
+  if (!("Notification" in window)) return;
 
+  // Xin quyền thông báo nếu chưa có
+  const permission = await Notification.requestPermission();
+  if (permission !== "granted") return;
+
+  // Lấy ngày hiện tại
+  const today = new Date().toISOString().slice(0, 10);
+  const lastShown = localStorage.getItem("lastNotificationDate");
+
+  // Nếu hôm nay chưa thông báo thì hiện 1 lần
+  if (lastShown !== today) {
+    new Notification("📊 Nhập cân nặng hôm nay nhé!", {
+      body: "Giữ thói quen tốt giúp bạn đạt mục tiêu nhanh hơn 💪",
+      icon: "icon-192.png" // hoặc đổi icon nếu bạn muốn
+    });
+    localStorage.setItem("lastNotificationDate", today);
+  }
+});
+</script>
 
 </body>
 </html>
