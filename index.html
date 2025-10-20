@@ -977,7 +977,8 @@ storageBucket: "theo-doi-can-nang.appspot.com",
 
 
 // Đăng ký service worker trước khi xin quyền thông báo
-navigator.serviceWorker.register('service-worker.js')
+navigator.serviceWorker.register('/theo-doi-can-nang/service-worker.js')
+
   .then((registration) => {
     console.log('✅ Service Worker đã đăng ký');
     messaging.useServiceWorker(registration);
