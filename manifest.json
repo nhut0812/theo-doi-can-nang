@@ -1,7 +1,7 @@
 {
   "name": "Theo Dõi Cân Nặng",
   "short_name": "Cân Nặng",
-  "start_url": "./",
+"start_url": "/theo-doi-can-nang/",
   "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
