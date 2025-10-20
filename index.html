@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Theo dõi cân nặng - Premium</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2966/2966481.png">
-<link rel="manifest" href="manifest.json">
 <style>
   :root {
     --bg: #ffffff;
@@ -160,6 +159,11 @@
     #logTable td:first-child { min-width: 90px; }
   }
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Theo dõi cân nặng">
+<link rel="apple-touch-icon" href="icon-192.png">
 
 </head>
 <body>
@@ -933,7 +937,7 @@ async function requestNotificationPermission(){
 function scheduleReminder(){
   const now = new Date();
   const next = new Date();
-  next.setHours(6,30,0,0); // giờ nhắc: 6h30 sáng
+  next.setHours(6,50,0,0); // giờ nhắc: 6h30 sáng
   if (next <= now) next.setDate(next.getDate() + 1); // nếu đã qua giờ, dời sang mai
   const delay = next - now;
 
@@ -951,12 +955,44 @@ window.addEventListener("load", () => {
 });
 
 </script>
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(() => console.log('✅ Service Worker registered'))
-      .catch(err => console.error('❌ Service Worker failed:', err));
-  }
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-messaging-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyC5VCyq3fUtYMDtm2BpssEvin8tFbMHjA",
+    authDomain: "theo-doi-can-nang.firebaseapp.com",
+    projectId: "theo-doi-can-nang",
+storageBucket: "theo-doi-can-nang.appspot.com",
+    messagingSenderId: "628935130155",
+    appId: "1:628935130155:web:2b10144d59074ccd7607e6",
+    measurementId: "G-6QEPJ5PDJS"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const messaging = firebase.messaging();
+
+  // Đăng ký service worker
+navigator.serviceWorker.register('service-worker.js').then((registration) => {
+  messaging.useServiceWorker(registration);
+
+
+    // Xin quyền nhận thông báo
+    messaging.requestPermission()
+      .then(() => messaging.getToken({ vapidKey: "B0xZj-Slo2VF9Ot0yaE3dst9bh_XNl4FdWoLS8wd7yTA0_Y0X6Fplhn58Fzf7zr9ns1bdL1CgRHoz2h79aVT0Q" }))
+      .then((token) => {
+        console.log("Firebase Token:", token);
+        alert("🔔 Đã bật thông báo thành công!");
+      })
+      .catch((err) => console.log("Lỗi khi xin quyền:", err));
+  });
+
+  // Khi nhận thông báo (khi app đang mở)
+  messaging.onMessage((payload) => {
+    console.log("Thông báo đến:", payload);
+    alert(payload.notification.title + ": " + payload.notification.body);
+  });
 </script>
 
 </body>
