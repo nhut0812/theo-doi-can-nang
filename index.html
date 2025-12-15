@@ -5,168 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Theo dõi cân nặng - Premium</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2966/2966481.png">
-<style>
-  :root {
-    --bg: #ffffff;
-    --card: #f7f9fc;
-    --ink: #0b1220;
-    --muted: #5b6576;
-    --accent: #2563eb;
-    --ok: #10b981;
-    --warn: #f59e0b;
-    --bad: #ef4444;
-    --line: #e5e7eb;
-    --goal: #9ca3af;
-  }
-
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
-  }
-
-  /* ==== HEADER PREMIUM ==== */
-  header {
-    padding: 28px 14px 18px;
-    text-align: center;
-    background: linear-gradient(135deg, #2563eb, #60a5fa);
-    color: #fff;
-    border-radius: 0 0 24px 24px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  }
-
-  header h1 {
-    font-size: 30px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    margin: 0;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.25);
-  }
-
-  header .sub {
-    font-size: 14px;
-    opacity: 0.9;
-    margin-top: 6px;
-    letter-spacing: 0.4px;
-  }
-
-  @media (max-width: 480px) {
-    header h1 { font-size: 22px; }
-    header .sub { font-size: 12px; }
-  }
-
-  /* ==== CẤU TRÚC CHUNG ==== */
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 10px; }
-  .row { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
-
-  .card {
-    grid-column: span 12;
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 14px;
-    box-shadow: 0 6px 20px rgba(15,23,42,.06);
-  }
-
-  @media (min-width: 720px) {
-    .card.sm-6 { grid-column: span 6; }
-    .card.sm-4 { grid-column: span 4; }
-    .card.sm-8 { grid-column: span 8; }
-    .card.sm-12 { grid-column: span 12; }
-  }
-
-  .label { font-size: 12px; color: var(--muted); }
-  .value { font-weight: 700; font-size: 20px; margin-top: 2px; }
-
-  .form-row { display: flex; gap: 8px; flex-wrap: wrap; }
-  input, button, select {
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    background: #fff;
-    color: var(--ink);
-  }
-
-  button {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: transform .06s, background .2s;
-  }
-
-  button:hover { background: #1d4ed8; }
-  button:active { transform: translateY(1px); }
-  button.ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); }
-  button:disabled { opacity: .6; cursor: not-allowed; }
-
-  .pill { display: inline-block; padding: 4px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--line); background: #fff; }
-
-  table { width: 100%; border-collapse: collapse; }
-  th, td {
-    border-bottom: 1px solid var(--line);
-    padding: 10px 8px;
-    text-align: left;
-    font-size: 14px;
-    vertical-align: top;
-  }
-
-  th { font-weight: 700; background: #fff; position: sticky; top: 0; z-index: 2; }
-  tbody tr:hover { background: #fafafa; }
-
-  .muted { color: var(--muted); }
-  canvas { width: 100%; height: 300px; display: block; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
-  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
-  .hint { font-size: 12px; color: var(--muted); }
-  .ok { color: var(--ok); }
-  .bad { color: var(--bad); }
-  .warn { color: var(--warn); }
-  .entered { background: #ecfeff; } /* ngày đã nhập */
-  .badge { display: inline-block; padding: 2px 6px; border-radius: 999px; font-size: 11px; border: 1px solid var(--line); background: #fff; }
-
-  /* ==== ALERT ==== */
-  .alert {
-    border: 1px solid #fde68a;
-    background: #fff8e1;
-    color: #92400e;
-    border-radius: 12px;
-    line-height: 1.5;
-    font-size: 14px;
-    padding: 12px;
-    animation: fadeIn 0.5s ease;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ==== BẢNG LOG ==== */
-  #logTable th:first-child,
-  #logTable td:first-child {
-    min-width: 100px;
-    white-space: nowrap;
-  }
-
-  #logTable { min-width: 650px; }
-
-  @media (max-width: 480px) {
-    .wrap { padding: 6px; }
-    .card { padding: 10px; }
-    #logTable th:first-child,
-    #logTable td:first-child { min-width: 90px; }
-  }
-</style>
+<link rel="stylesheet" href="css/styles.css">
 <link rel="manifest" href="manifest.json">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Theo dõi cân nặng">
 <link rel="apple-touch-icon" href="icon-192.png">
-
-
 </head>
 <body>
 <header>
@@ -174,14 +19,13 @@
   <div class="sub">Quản lý sức khỏe mỗi ngày • Dữ liệu đồng bộ thông minh ☁️</div>
 </header>
 
-
 <div class="wrap">
   <div class="row">
     <div class="card sm-8">
       <div class="form-row">
         <label class="pill">Ngày bắt đầu: <b id="startLabel"></b></label>
         <label class="pill">BMI mục tiêu: <b id="bmiGoalLabel"></b></label>
-        <label class="pill">Cân nặng mục tiêu: <b id="goalLabel"></b> kg</label>
+        <label class="pill">Cân nặng mục tiêu: <input type="number" step="0.1" id="goalWeightInput" style="width:70px;padding:4px 8px;font-weight:700;" value="63.6"> kg</label>
         <label class="pill">TB 7 ngày gần nhất: <b id="avg7Label"></b> kg</label>
       </div>
       <div style="margin-top:10px" class="form-row">
@@ -190,13 +34,13 @@
         <button id="saveBtn">Lưu</button>
         <button class="ghost" id="clearBtn">Xoá cân nặng ngày này</button>
       </div>
-      <div class="hint" style="margin-top:8px">Mẹo: chạm vào cân nặng trong bảng để sửa nhanh. Giá trị nhập tạm được giữ lại nếu reload.</div>
+      <div class="hint" style="margin-top:8px">Mẹo: chạm vào cân nặng trong lịch để sửa nhanh. Giá trị nhập tạm được giữ lại nếu reload.</div>
     </div>
 
     <div class="card sm-4">
       <div class="label">Dự đoán đạt mục tiêu</div>
-      <div class="value" id="etaValue">—</div>
-      <div class="hint">Dựa trên tốc độ 14 ngày gần nhất và hướng mục tiêu.</div>
+      <div id="etaValue" style="font-size:18px;line-height:1.4;background:none;-webkit-text-fill-color:initial;">—</div>
+      <div class="hint">Phân tích thông minh từ xu hướng 3, 7 và 14 ngày.</div>
       <div id="gainAlert" style="margin-top:10px;display:none" class="alert">Cảnh báo: bạn đang tăng cân 3 ngày liên tiếp. Hãy xem lại ăn mặn/tinh bột ban đêm và tăng vận động nhẹ.</div>
     </div>
 
@@ -213,14 +57,41 @@
       <div class="value" id="remainValue">—</div>
     </div>
     <div class="card sm-4">
-      <div class="label">Tốc độ 14 ngày</div>
-      <div class="value" id="rate14">—</div>
+      <div class="label">Tốc độ 7 ngày</div>
+      <div class="value" id="rate7">—</div>
       <div class="hint">kg/tuần (âm là giảm cân).</div>
+    </div>
+
+    <!-- Thống kê Streak & Best Week -->
+    <div class="card sm-4">
+      <div class="label">🔥 Streak hiện tại</div>
+      <div class="value" id="currentStreak">—</div>
+      <div class="hint">Ngày liên tục có dữ liệu</div>
+    </div>
+    <div class="card sm-4">
+      <div class="label">🏆 Tuần tốt nhất</div>
+      <div class="value" id="bestWeek">—</div>
+      <div class="hint">Tuần giảm cân nhiều nhất</div>
+    </div>
+    <div class="card sm-4">
+      <div class="label">⭐ Thành tích</div>
+      <div id="achievementBadges" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;min-height:40px;">
+        <!-- Badges will be inserted here -->
+      </div>
+      <div class="hint">Huy hiệu đã đạt được</div>
     </div>
 
     <div class="card sm-12" style="position:relative">
       <canvas id="chart"></canvas>
       <div id="chartTip" class="tooltip" style="display:none"></div>
+    </div>
+
+    <!-- Monthly Summary Card -->
+    <div class="card sm-12">
+      <div class="label" style="font-size:16px;margin-bottom:12px;">📊 Tổng kết tháng</div>
+      <div id="monthlySummary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+        <!-- Monthly stats will be inserted here -->
+      </div>
     </div>
 
     <div class="card sm-12">
@@ -233,740 +104,34 @@
           <input type="file" id="importFile" accept=".json" style="display:none">
           <button class="ghost" id="importBtn">Nhập JSON</button>
           <button class="ghost" id="resetBtn">Xoá toàn bộ</button>
-
-  <button id="enableNotifyBtn">🔔 Cho phép thông báo</button>
-
-
+          <button id="enableNotifyBtn">🔔 Cho phép thông báo</button>
+          <button class="ghost" id="setReminderBtn">⏰ Đặt nhắc nhở</button>
         </div>
       </div>
     </div>
 
     <div class="card sm-12">
-      <div class="label">Nhật ký (vuốt ngang để xem hết)</div>
-      <div style="overflow:auto">
-        <table id="logTable">
-          <thead>
-            <tr>
-              <th>Ngày</th>
-              <th>Cân nặng (kg)</th>
-              <th>BMI</th>
-              <th>% Hoàn thành</th>
-              <th>Lời khuyên AI</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+      <div class="calendar-header">
+        <h3 id="calendarMonth">Tháng 12, 2025</h3>
+        <div class="calendar-nav">
+          <button id="prevMonth" class="ghost">← Tháng trước</button>
+          <button id="todayBtn" class="ghost">Hôm nay</button>
+          <button id="nextMonth" class="ghost">Tháng sau →</button>
+        </div>
       </div>
+      <div id="calendarView"></div>
     </div>
   </div>
 </div>
 
-<script>
-// ====== CẤU HÌNH CÁ NHÂN ======
-const HEIGHT_CM = 170;
-const START_WEIGHT = 109.7;
-const TARGET_BMI = 22;
-const START_DATE = new Date("2025-09-29");
-const DAYS = 365;
-const GOAL_WEIGHT = Math.round(((HEIGHT_CM/100)**2 * TARGET_BMI)*10)/10;
-
-// ====== LƯU TRỮ ======
-const KEY = "weight-tracker-170cm-2025";
-const KEY_TMP = "weight-tracker-tmp";
-function loadData(){
-  const raw = localStorage.getItem(KEY);
-  if(!raw) return {};
-  try { return JSON.parse(raw) || {}; } catch(e){ return {}; }
-}
-function saveData(data){ localStorage.setItem(KEY, JSON.stringify(data)); }
-
-// giữ giá trị nhập tạm
-function loadTmp(){ try{ return JSON.parse(localStorage.getItem(KEY_TMP)||"{}"); }catch(e){return{}} }
-function saveTmp(obj){ localStorage.setItem(KEY_TMP, JSON.stringify(obj||{})); }
-
-// ====== TIỆN ÍCH ======
-function fmtDate(d){ const z=(n)=>String(n).padStart(2,"0"); return d.getFullYear()+"-"+z(d.getMonth()+1)+"-"+z(d.getDate()); }
-function clamp(x,a,b){ return Math.max(a, Math.min(b,x)); }
-function movingAvg(arr, window){
-  const out = new Array(arr.length).fill(null);
-  for(let i=0;i<arr.length;i++){
-    let s=0,c=0;
-    for(let j=Math.max(0,i-window+1);j<=i;j++){
-      const v = arr[j];
-      if(v!=null){ s+=v; c++; }
-    }
-    out[i]= c? s/c : null;
-  }
-  return out;
-}
-function lastNonNull(arr){
-  for(let i=arr.length-1;i>=0;i--) if(arr[i]!=null) return {index:i, value:arr[i]};
-  return null;
-}
-
-// ====== KHỞI TẠO DÃY NGÀY ======
-const dates = Array.from({length:DAYS}, (_,i)=>{ const d = new Date(START_DATE); d.setDate(d.getDate()+i); return d; });
-document.getElementById("startLabel").textContent = fmtDate(START_DATE);
-document.getElementById("bmiGoalLabel").textContent = TARGET_BMI;
-document.getElementById("goalLabel").textContent = GOAL_WEIGHT.toFixed(1);
-
-// Điền ngày mặc định = hôm nay (nếu nằm trong phạm vi)
-const today = new Date(); today.setHours(0,0,0,0);
-let defaultDate = today;
-if(today < START_DATE) defaultDate = START_DATE;
-if(today > dates[dates.length-1]) defaultDate = dates[dates.length-1];
-document.getElementById("dateInput").value = fmtDate(defaultDate);
-
-// ====== TẢI DỮ LIỆU ======
-let data = loadData(); // map yyyy-mm-dd -> weight
-let tmp = loadTmp();   // {dateInput, weightInput}
-
-// Nếu có giá trị nhập tạm, hiển thị lại
-if(tmp.weightInput){ document.getElementById("weightInput").value = tmp.weightInput; }
-document.getElementById("weightInput").addEventListener("input", (e)=>{ tmp.weightInput = e.target.value; saveTmp(tmp); });
-
-// ====== AI MINI LỜI KHUYÊN (phiên bản chuẩn & chuyên sâu) ======
-// ====== AI MINI LỜI KHUYÊN (phiên bản tối ưu & chuyên sâu nhất) ======
-function adviceForDelta(d){
-  if (d == null || isNaN(d)) return "";
-
-  // làm tròn gọn hiển thị
-  const abs = Math.abs(d);
-  const dd = (d > 0 ? "+" : "") + (Math.round(d * 10) / 10).toFixed(1);
-
-  // === ỔN ĐỊNH ===
-  if (abs < 0.1) {
-    return `⚖️ Ổn định (${dd}kg). Cơ thể đang ở trạng thái cân bằng.
-👉 Duy trì:
-• Ăn đúng bữa, không bỏ bữa sáng
-• Ngủ đủ 7–8 tiếng, tránh stress
-• Uống đủ 2L nước/ngày
-• Tiếp tục tập nhẹ hoặc đi bộ đều`;
-  }
-
-  // === GIẢM CÂN ===
-  if (d < 0) {
-    if (abs >= 1.5)
-      return `🚨 Giảm rất nhanh (${dd}kg)! Có thể mất nước hoặc thiếu năng lượng.
-👉 Nên:
-• Ăn đủ 3 bữa, thêm 1 bữa phụ có đạm
-• Uống 2–2.5L nước/ngày
-• Nghỉ ngơi nhiều hơn, tránh tập nặng
-• Theo dõi nếu mệt, hoa mắt hoặc ngủ kém`;
-
-    if (abs >= 1.0)
-      return `💪 Giảm mạnh (${dd}kg). Tiến độ rất tốt!
-👉 Gợi ý:
-• Giữ khẩu phần đạm 1.6–2g/kg
-• Hạn chế tinh bột trắng, tăng rau xanh
-• Ăn tối sớm (trước 19h30)
-• Tránh bỏ bữa hoặc nhịn ăn cực đoan`;
-
-    if (abs >= 0.6)
-      return `✅ Giảm ổn định (${dd}kg). Tiến độ lý tưởng.
-👉 Tiếp tục:
-• Uống nước đều trong ngày
-• Ăn chậm, nhai kỹ
-• Duy trì ngủ sớm & giảm đồ chiên rán
-• Tập vừa sức (đi bộ, plank, yoga)`;
-
-    if (abs >= 0.3)
-      return `🌿 Giảm nhẹ (${dd}kg). Hoàn toàn bình thường.
-👉 Duy trì:
-• Giảm tinh bột buổi tối
-• Tăng rau & trái cây tươi
-• Đi bộ 6–8k bước/ngày
-• Theo dõi thêm vài ngày nữa để thấy xu hướng`;
-
-    return `💤 Giảm rất nhẹ (${dd}kg) — dao động do nước hoặc muối.
-👉 Uống đủ nước, ngủ sớm và ăn nhạt 1–2 ngày.`;
-  }
-
-  // === TĂNG CÂN ===
-  if (d > 0) {
-    if (d >= 1.2)
-      return `❗ Tăng nhanh (${dd}kg)! Có thể do “cheat day” hoặc ăn tối muộn.
-👉 Cần:
-• Ăn nhạt 2 ngày, cắt đồ ngọt và nước có gas
-• Uống 2.5L nước/ngày
-• Tăng vận động (đi bộ 8k–10k bước/ngày)
-• Tránh thức khuya & đồ ăn khuya`;
-
-    if (d >= 0.8)
-      return `🚩 Tăng rõ (${dd}kg). Cơ thể có thể tích nước hoặc dư calo.
-👉 Gợi ý:
-• Ghi lại thực đơn 2–3 ngày gần nhất
-• Giảm 25–30% tinh bột buổi tối
-• Ăn chậm, nhai kỹ, hạn chế snack
-• Đi bộ nhanh 30 phút mỗi ngày`;
-
-    if (d >= 0.5)
-      return `🥯 Tăng nhẹ vừa (${dd}kg). Có thể do ăn mặn hoặc ít vận động.
-👉 Khắc phục:
-• Giảm tinh bột trắng, ăn nhạt hơn
-• Uống nước ấm trước bữa ăn
-• Không ăn vặt sau 20h
-• Ngủ đủ giấc để giảm cortisol`;
-
-    if (d >= 0.3)
-      return `📈 Tăng nhẹ (${dd}kg). Dao động tạm thời là bình thường.
-👉 Mẹo:
-• Uống thêm nước, hạn chế muối
-• Ăn nhiều rau xanh, trái cây tươi
-• Tập nhẹ (đi bộ 15 phút sau ăn tối)
-• Kiểm tra lại lượng nước nạp trong ngày`;
-
-    return `🙂 Tăng rất nhẹ (${dd}kg) — biến động nhỏ trong giới hạn an toàn.
-👉 Duy trì ăn uống điều độ, theo dõi 2–3 ngày tới để xem xu hướng.`;
-  }
-
-  return "";
-}
-
-
-
-// ====== TÍNH TOÁN CHÍNH ======
-function recompute(){
-  // Build aligned arrays
-  const weights = dates.map(d => {
-    const w = data[fmtDate(d)];
-    return (typeof w==="number" && w>0)? w : null;
-  });
-  const bmi = weights.map(w => w==null ? null : w/((HEIGHT_CM/100)**2));
-  // progress%
-  const progress = weights.map(w => {
-    if(w==null) return null;
-    if(GOAL_WEIGHT < START_WEIGHT){ // giảm cân
-      const p = (START_WEIGHT - w) / (START_WEIGHT - GOAL_WEIGHT);
-      return clamp(p,0,1);
-    } else { // tăng cân
-      const p = (w - START_WEIGHT) / (GOAL_WEIGHT - START_WEIGHT);
-      return clamp(p,0,1);
-    }
-  });
-  // 7-day avg
-  const avg7 = movingAvg(weights, 7);
-
-  // 14-day rate (kg/tuần)
-  let rate14 = null;
-  for(let i=14;i<weights.length;i++){
-    const a = weights[i-14], b = weights[i];
-    if(a!=null && b!=null) rate14 = (b - a)/14*7;
-  }
-
-  // Trung bình 7 ngày gần nhất (hiển thị)
-  const lastAvg = lastNonNull(avg7);
-  document.getElementById("avg7Label").textContent = lastAvg? lastAvg.value.toFixed(1) : "—";
-
-  // Metrics gần nhất
-  const lastW = lastNonNull(weights);
-  const lastB = lastNonNull(bmi);
-  const lastP = lastNonNull(progress);
-
-  const latestWeight = document.getElementById("latestWeight");
-  const latestBMI = document.getElementById("latestBMI");
-  const progressValue = document.getElementById("progressValue");
-  const remainValue = document.getElementById("remainValue");
-  const rate14El = document.getElementById("rate14");
-  const etaValue = document.getElementById("etaValue");
-
-  latestWeight.textContent = lastW? lastW.value.toFixed(1)+" kg" : "—";
-  latestBMI.textContent = lastB? lastB.value.toFixed(1) : "—";
-  progressValue.textContent = lastP? Math.round(lastP.value*100)+"%" : "—";
-  remainValue.textContent = lastW? Math.abs(lastW.value - GOAL_WEIGHT).toFixed(1)+" kg":"—";
-  rate14El.textContent = (rate14==null? "—" : rate14.toFixed(2));
-
-  // Dự đoán ngày đạt + số ngày còn lại
-  let eta = "—";
-  if(lastW && rate14!=null){
-    const dir = (GOAL_WEIGHT<START_WEIGHT)? -1 : 1;
-    if((dir === -1 && rate14 < 0) || (dir === 1 && rate14 > 0)){
-      const weeks = Math.abs((lastW.value - GOAL_WEIGHT) / rate14);
-      const daysNeed = Math.round(weeks*7);
-      const from = dates[lastW.index] || today;
-      const etaDate = new Date(from); etaDate.setDate(etaDate.getDate()+daysNeed);
-      eta = fmtDate(etaDate) + " (≈ " + daysNeed + " ngày nữa)";
-    }
-  }
-  etaValue.textContent = eta;
-
-  // Cảnh báo tăng 3 ngày liên tiếp
-// === CẢNH BÁO THÔNG MINH ===
-const alertBox = document.getElementById("gainAlert");
-alertBox.style.display = "none";
-
-let upCount = 0, downCount = 0;
-for (let i = weights.length - 1; i >= 1; i--) {
-  if (weights[i] == null || weights[i - 1] == null) continue;
-  const diff = weights[i] - weights[i - 1];
-  if (diff > 0.1) upCount++;
-  else if (diff < -0.1) downCount++;
-  else break;
-  if (upCount >= 3 || downCount >= 3) break;
-}
-
-if (upCount >= 3) {
-  alertBox.textContent =
-    "⚠️ Bạn đang tăng cân 3 ngày liên tiếp. Hãy kiểm tra lại khẩu phần tinh bột, ăn nhạt hơn và tăng vận động nhẹ 💪";
-  alertBox.style.display = "block";
-} else if (downCount >= 3) {
-  alertBox.textContent =
-    "🎉 Bạn giảm liên tục 3 ngày rồi! Duy trì nhịp độ, nhớ ăn đủ đạm và ngủ ngon để giữ sức khỏe ❤️";
-  alertBox.style.display = "block";
-}
-
-  // Render bảng
-  renderTable(weights, bmi, progress);
-
-  // Vẽ biểu đồ mượt + đường mục tiêu
-  drawChart(weights, avg7);
-}
-
-function renderTable(weights, bmi, progress){
-  const tb = document.querySelector("#logTable tbody");
-  tb.innerHTML = "";
-  for(let i=0;i<dates.length;i++){
-    const tr = document.createElement("tr");
-    const d = fmtDate(dates[i]);
-
-    const tdDate = document.createElement("td");
-    tdDate.textContent = d;
-
-    const tdW = document.createElement("td");
-    tdW.textContent = weights[i]!=null ? weights[i].toFixed(1): "";
-    tdW.className = "editable";
-    tdW.style.cursor="text";
-    if(weights[i]!=null){ tr.classList.add("entered"); }
-    tdW.onclick = ()=>{
-      const val = prompt("Nhập cân nặng (kg) cho ngày "+d, tdW.textContent || (tmp.weightInput||""));
-      if(val===null) return;
-      const num = parseFloat(val);
-      if(!isNaN(num) && num>0){
-        data[d] = Math.round(num*10)/10;
-      }else{
-        delete data[d];
-      }
-      saveData(data);
-      recompute();
-    };
-
-    const tdB = document.createElement("td");
-    const bmiVal = weights[i]==null ? null : weights[i]/((HEIGHT_CM/100)**2);
-    tdB.textContent = bmiVal!=null ? bmiVal.toFixed(1): "";
-
-    const tdP = document.createElement("td");
-    let prog = null;
-    if(weights[i]!=null){
-      if(GOAL_WEIGHT < START_WEIGHT){
-        prog = (START_WEIGHT - weights[i])/(START_WEIGHT - GOAL_WEIGHT);
-      }else{
-        prog = (weights[i] - START_WEIGHT)/(GOAL_WEIGHT - START_WEIGHT);
-      }
-      prog = clamp(prog,0,1);
-    }
-    tdP.textContent = prog!=null ? Math.round(prog*100)+"%" : "";
-    if(prog!=null){
-      if(prog >= 0.8) tdP.className="ok";
-      else if(prog >= 0.4) tdP.className="warn";
-      else tdP.className="bad";
-    }
-
-    // Lời khuyên AI: dựa trên delta so với ngày trước
-    let delta = null;
-    if(i>0 && weights[i]!=null){
-      const prev = weights[i-1];
-      if(prev!=null) delta = weights[i] - prev;
-    }
-    const tdAdv = document.createElement("td");
-    tdAdv.textContent = adviceForDelta(delta);
-
-    tr.appendChild(tdDate);
-    tr.appendChild(tdW);
-    tr.appendChild(tdB);
-    tr.appendChild(tdP);
-    tr.appendChild(tdAdv);
-    tb.appendChild(tr);
-  }
-}
-
-// ====== VẼ BIỂU ĐỒ MƯỢT (CANVAS THUẦN) ======
-function drawChart(series, avg7){
-  const canvas = document.getElementById("chart");
-  const tip = document.getElementById("chartTip");
-  const ctx = canvas.getContext("2d");
-  const W = canvas.clientWidth, H = canvas.clientHeight;
-  const DPR = window.devicePixelRatio || 1;
-  canvas.width = Math.floor(W*DPR);
-  canvas.height = Math.floor(H*DPR);
-  ctx.scale(DPR,DPR);
-
-  ctx.clearRect(0,0,W,H);
-  const pL=42,pR=12,pT=12,pB=28;
-  const plotW=W-pL-pR, plotH=H-pT-pB;
-
-  // bounds
-  const vals = series.filter(v=>v!=null);
-  const vals2 = avg7.filter(v=>v!=null);
-  const all = vals.concat(vals2);
-  if(all.length===0){
-    ctx.fillStyle="#6b7280"; ctx.fillText("Chưa có dữ liệu để vẽ biểu đồ", pL, pT+16); return;
-  }
-  const minV = Math.min(...all), maxV = Math.max(...all);
-  const pad = Math.max(1,(maxV-minV)*0.12);
-  const yMin = Math.min(minV - pad, GOAL_WEIGHT - 1);
-  const yMax = Math.max(maxV + pad, GOAL_WEIGHT + 1);
-
-  // axes
-  ctx.strokeStyle="#e5e7eb"; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(pL, pT); ctx.lineTo(pL, pT+plotH); ctx.lineTo(pL+plotW, pT+plotH); ctx.stroke();
-
-  // y ticks
-  ctx.fillStyle="#6b7280"; ctx.font="12px system-ui";
-  const steps = 4;
-  for(let i=0;i<=steps;i++){
-    const t = yMin + (i/steps)*(yMax-yMin);
-    const y = pT + plotH - (t - yMin)/(yMax-yMin)*plotH;
-    ctx.beginPath(); ctx.moveTo(pL,y); ctx.lineTo(pL+plotW,y); ctx.strokeStyle="#f1f5f9"; ctx.stroke();
-    ctx.fillText(t.toFixed(1), 4, y+4);
-  }
-
-  function xAt(i){ return pL + (i/(series.length-1))*plotW; }
-  function yAt(v){ return pT + plotH - (v - yMin)/(yMax-yMin)*plotH; }
-
-  // goal line
-  ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--goal').trim() || "#9ca3af";
-  ctx.setLineDash([6,6]); ctx.lineWidth=1.5;
-  ctx.beginPath(); ctx.moveTo(pL, yAt(GOAL_WEIGHT)); ctx.lineTo(pL+plotW, yAt(GOAL_WEIGHT)); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle="#6b7280"; ctx.fillText("Mục tiêu " + GOAL_WEIGHT.toFixed(1)+"kg", pL+6, yAt(GOAL_WEIGHT)-6);
-
-  // smooth path helper (Catmull-Rom to Bezier)
-  function smoothPath(points){
-    if(points.length<2) return null;
-    const path = [];
-    for(let i=0;i<points.length-1;i++){
-      const p0 = points[i-1] || points[i];
-      const p1 = points[i];
-      const p2 = points[i+1];
-      const p3 = points[i+2] || p2;
-      const cp1x = p1.x + (p2.x - p0.x)/6;
-      const cp1y = p1.y + (p2.y - p0.y)/6;
-      const cp2x = p2.x - (p3.x - p1.x)/6;
-      const cp2y = p2.y - (p3.y - p1.y)/6;
-      path.push({p1,cp1:{x:cp1x,y:cp1y},cp2:{x:cp2x,y:cp2y},p2});
-    }
-    return path;
-  }
-
-  // collect points (weight)
-  const pts = [];
-  for(let i=0;i<series.length;i++){
-    const v = series[i];
-    if(v==null) continue;
-    pts.push({i, x:xAt(i), y:yAt(v), v});
-  }
-  // draw weight line
-  if(pts.length){
-    const path = smoothPath(pts);
-    ctx.strokeStyle="#2563eb"; ctx.lineWidth=2;
-    ctx.beginPath();
-    ctx.moveTo(pts[0].x, pts[0].y);
-    if(path){
-      for(const seg of path){
-        ctx.bezierCurveTo(seg.cp1.x, seg.cp1.y, seg.cp2.x, seg.cp2.y, seg.p2.x, seg.p2.y);
-      }
-    }
-    ctx.stroke();
-  }
-
-  // avg7 line
-  const ptsAvg = [];
-  for(let i=0;i<avg7.length;i++){
-    const v = avg7[i]; if(v==null) continue;
-    ptsAvg.push({i, x:xAt(i), y:yAt(v), v});
-  }
-  if(ptsAvg.length){
-    const path2 = smoothPath(ptsAvg);
-    ctx.strokeStyle="#0ea5e9"; ctx.lineWidth=2;
-    ctx.beginPath();
-    ctx.moveTo(ptsAvg[0].x, ptsAvg[0].y);
-    if(path2){
-      for(const seg of path2){
-        ctx.bezierCurveTo(seg.cp1.x, seg.cp1.y, seg.cp2.x, seg.cp2.y, seg.p2.x, seg.p2.y);
-      }
-    }
-    ctx.stroke();
-  }
-
-  // x labels (first/mid/last)
-  ctx.fillStyle="#6b7280";
-  const first = fmtDate(dates[0]);
-  const mid = fmtDate(dates[Math.floor(dates.length/2)]);
-  const last = fmtDate(dates[dates.length-1]);
-  ctx.fillText(first, pL, H-6);
-  ctx.fillText(mid, pL+plotW/2-30, H-6);
-  ctx.fillText(last, pL+plotW-80, H-6);
-
-  // tooltip interactions
-  function nearestPoint(mx){
-    let best=null, bestDist=1e9;
-    const arr = pts.length? pts: ptsAvg;
-    for(const p of arr){
-      const dx = Math.abs(p.x - mx);
-      if(dx < bestDist){ best = p; bestDist = dx; }
-    }
-    return best;
-  }
-
-  function showTip(p){
-    if(!p){ tip.style.display="none"; return; }
-    tip.style.display="block";
-    tip.style.left = p.x + "px";
-    tip.style.top = p.y + "px";
-    tip.textContent = fmtDate(dates[p.i]) + " • " + p.v.toFixed(1) + " kg";
-  }
-
-  function handleMove(evt){
-    const rect = canvas.getBoundingClientRect();
-    const x = (evt.touches? evt.touches[0].clientX: evt.clientX) - rect.left;
-    showTip(nearestPoint(x));
-  }
-  canvas.onmousemove = handleMove;
-  canvas.ontouchstart = handleMove;
-  canvas.ontouchmove = handleMove;
-  canvas.onmouseleave = ()=> tip.style.display="none";
-}
-
-document.getElementById("saveBtn").onclick = async ()=>{
-  const d = document.getElementById("dateInput").value;
-  const w = parseFloat(document.getElementById("weightInput").value);
-  if(!d || isNaN(w) || w<=0){ alert("⚠️ Vui lòng nhập ngày và cân nặng hợp lệ."); return; }
-  const dd = new Date(d);
-  if(dd < START_DATE || dd > dates[dates.length-1]){
-    alert("⚠️ Ngày nằm ngoài phạm vi theo dõi."); return;
-  }
-
-  // Lưu cân nặng
-  data[d] = Math.round(w*10)/10;
-  saveData(data);
-  tmp.weightInput = ""; saveTmp(tmp);
-  document.getElementById("weightInput").value="";
-  recompute();
-
-  // Thông báo
-  alert("✅ Đã lưu cân nặng!");
-
-  // Tự đồng bộ lên GitHub Gist
-  await syncToGist();
-};
-
-
-document.getElementById("clearBtn").onclick = ()=>{
-  const d = document.getElementById("dateInput").value;
-  if(!d){ alert("Chưa chọn ngày."); return; }
-  delete data[d];
-  saveData(data);
-  recompute();
-};
-
-document.getElementById("exportBtn").onclick = ()=>{
-  const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "can-nang-data.json";
-  a.click();
-};
-
-document.getElementById("importBtn").onclick = ()=> document.getElementById("importFile").click();
-document.getElementById("importFile").onchange = (e)=>{
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = ()=>{
-    try{
-      const obj = JSON.parse(reader.result);
-      data = obj && typeof obj==="object" ? obj : {};
-      saveData(data);
-      recompute();
-      alert("Nhập dữ liệu thành công!");
-    }catch(err){ alert("File không hợp lệ."); }
-  };
-  reader.readAsText(file);
-};
-
-document.getElementById("resetBtn").onclick = ()=>{
-  if(confirm("Xoá toàn bộ dữ liệu đã lưu trên máy này?")){
-    localStorage.removeItem(KEY);
-    localStorage.removeItem(KEY_TMP);
-    data={}; tmp={};
-    recompute();
-  }
-};
-// ====== ĐỒNG BỘ GITHUB GIST (an toàn, không lộ token) ======
-
-// Lưu token và gist ID vào localStorage
-const KEY_GIST = "weight-tracker:gist";
-function loadGistInfo(){
-  try { return JSON.parse(localStorage.getItem(KEY_GIST)||"{}"); }catch(e){return{};}
-}
-function saveGistInfo(o){ localStorage.setItem(KEY_GIST, JSON.stringify(o)); }
-
-async function askGistInfo(){
-  const info = loadGistInfo();
-  
-  let gistId = prompt("Nhập Gist ID: 1f849577016aeb8150c4ffe2e43ddc1b", info.gistId || "");
-  if(!gistId) return null;
-  let token = prompt("Nhập GitHub Token: ", info.token || "");
-  if(!token) return null;
-  const obj = { gistId, token };
-  saveGistInfo(obj);
-  return obj;
-}
-
-// ====== ☁️ ĐỒNG BỘ GITHUB GIST 2 CHIỀU (CÓ THÔNG BÁO) ======
-async function syncToGist(){
-  let { gistId, token } = loadGistInfo();
-  if (!gistId || !token) {
-    const got = await askGistInfo();
-    if (!got) return alert("⚠️ Chưa nhập đủ thông tin Gist.");
-    gistId = got.gistId;
-    token = got.token;
-  }
-
-  try {
-    const currentData = loadData();
-    currentData._updatedAt = new Date().toISOString();
-    saveData(currentData);
-
-    const res = await fetch(`https://api.github.com/gists/${gistId}`, {
-      method: "PATCH",
-      headers: {
-        "Authorization": "token " + token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        files: {
-          "can-nang-data.json": {
-            content: JSON.stringify(currentData, null, 2),
-          },
-        },
-      }),
-    });
-
-    if (res.ok) {
-      alert("✅ Đã đồng bộ dữ liệu lên GitHub Gist thành công!");
-    } else {
-      const text = await res.text();
-      alert("⚠️ Lỗi đồng bộ Gist:\n" + text.slice(0, 200));
-    }
-  } catch (e) {
-    alert("❌ Không thể đồng bộ Gist: " + e.message);
-    console.error(e);
-  }
-}
-
-async function loadFromGist() {
-  let { gistId, token } = loadGistInfo();
-  if (!gistId || !token) {
-    const got = await askGistInfo();
-    if (!got) return;
-    gistId = got.gistId;
-    token = got.token;
-  }
-
-  try {
-    const res = await fetch(`https://api.github.com/gists/${gistId}`, {
-      headers: { Authorization: "token " + token },
-    });
-    const gist = await res.json();
-    const content = gist.files["can-nang-data.json"]?.content;
-    if (!content) {
-      alert("⚠️ Không tìm thấy file can-nang-data.json trên Gist!");
-      return;
-    }
-
-    const remote = JSON.parse(content);
-    const local = loadData();
-
-    const localTime = new Date(local._updatedAt || 0);
-    const remoteTime = new Date(remote._updatedAt || 0);
-
-    if (remoteTime > localTime) {
-      saveData(remote);
-      data = remote;
-      recompute();
-      alert("📥 Đã tải dữ liệu mới nhất từ GitHub Gist!");
-    } else if (localTime > remoteTime) {
-      alert("🆗 Dữ liệu trong máy mới hơn, giữ nguyên.");
-    } else {
-      alert("ℹ️ Dữ liệu đã đồng bộ, không có thay đổi.");
-    }
-  } catch (e) {
-    alert("❌ Không thể tải dữ liệu từ Gist: " + e.message);
-    console.error(e);
-  }
-}
-
-// Khi mở trang, tự động tải dữ liệu Gist nếu có
-window.addEventListener("DOMContentLoaded", () => {
-  loadFromGist();
-});
-// ====== NÚT GIAO DIỆN ĐỒNG BỘ GIST ======
-window.addEventListener("DOMContentLoaded", ()=>{
-  const wrap = document.querySelector("#exportBtn").parentNode;
-
-  // Nút đồng bộ lên GitHub
-  const btnSync = document.createElement("button");
-  btnSync.textContent = "⬆️ Đồng bộ lên GitHub";
-  btnSync.className = "ghost";
-  btnSync.onclick = syncToGist;
-  wrap.appendChild(btnSync);
-
-  // Nút tải dữ liệu từ GitHub
-  const btnLoad = document.createElement("button");
-  btnLoad.textContent = "⬇️ Tải từ GitHub";
-  btnLoad.className = "ghost";
-  btnLoad.onclick = loadFromGist;
-  wrap.appendChild(btnLoad);
-});
-
-
-// ====== KHỞI CHẠY ======
-recompute();
-
-
-
-</script>
-
-<script>
-// ====== 🔔 Thông báo khi mở web ======
-document.getElementById("enableNotifyBtn").addEventListener("click", async () => {
-  if (!("Notification" in window)) {
-    alert("Trình duyệt của bạn không hỗ trợ thông báo.");
-    return;
-  }
-
-  const permission = await Notification.requestPermission();
-  if (permission !== "granted") {
-    alert("⚠️ Bạn chưa cho phép thông báo.");
-    return;
-  }
-
-  const today = new Date().toISOString().slice(0, 10);
-  const lastShown = localStorage.getItem("lastNotificationDate");
-
-  if (lastShown !== today) {
-    new Notification("📊 Nhập cân nặng hôm nay nhé!", {
-      body: "Giữ thói quen tốt giúp bạn đạt mục tiêu nhanh hơn 💪",
-      icon: "icon-192.png"
-    });
-    localStorage.setItem("lastNotificationDate", today);
-  } else {
-    alert("✅ Bạn đã bật thông báo hôm nay rồi!");
-  }
-});
-
-</script>
+<!-- Load JavaScript modules in order -->
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/calculations.js"></script>
+<script src="js/statistics.js"></script>
+<script src="js/calendar.js"></script>
+<script src="js/reminders.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>
