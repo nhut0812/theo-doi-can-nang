@@ -452,11 +452,123 @@ canvas {
   .day-bmi, .day-progress {
     font-size: 10px;
   }
+  
+  /* Mobile optimizations */
+  .value {
+    font-size: 24px;
+  }
+  
+  input, button, select {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  
+  .pill {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
 }
 
 @media (max-width: 480px) {
   .wrap { padding: 6px; }
-  .card { padding: 10px; }
+  .card { padding: 12px; }
   .calendar-header h3 { font-size: 16px; }
-  .calendar-nav button { padding: 6px 12px; }
+  .calendar-nav button { padding: 6px 12px; font-size: 12px; }
+  
+  /* Tối ưu form cho mobile */
+  .form-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .form-row input,
+  .form-row button,
+  .form-row select {
+    width: 100%;
+  }
+  
+  /* Pills wrap tốt hơn trên mobile */
+  .pill {
+    font-size: 11px;
+    padding: 5px 9px;
+  }
+  
+  /* Value cards rõ hơn */
+  .value {
+    font-size: 22px;
+  }
+  
+  .label {
+    font-size: 11px;
+  }
+  
+  /* Buttons dễ bấm hơn */
+  button {
+    min-height: 44px;
+    font-size: 13px;
+  }
+  
+  button.ghost {
+    min-height: 40px;
+  }
+  
+  /* Calendar day cells dễ chạm */
+  .calendar-day {
+    min-height: 60px;
+    padding: 4px;
+  }
+  
+  .day-number {
+    font-size: 11px;
+  }
+  
+  .day-weight {
+    font-size: 13px;
+  }
+  
+  .day-bmi, .day-progress {
+    font-size: 9px;
+  }
+  
+  /* Hint text nhỏ hơn */
+  .hint {
+    font-size: 11px;
+  }
+  
+  /* Achievement badges */
+  .badge-item {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+  
+  /* Monthly summary */
+  #monthlySummary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .month-stat {
+    padding: 10px;
+  }
+  
+  .month-stat .month-value {
+    font-size: 18px;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Tăng kích thước tap target */
+  button {
+    min-height: 48px;
+    padding: 12px 18px;
+  }
+  
+  .calendar-day {
+    min-height: 65px;
+  }
+  
+  input[type="date"],
+  input[type="number"] {
+    min-height: 44px;
+  }
 }
